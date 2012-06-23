@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Yamba</string>
+    <string name="titleStatus">Yamba</string>
+    <string name="editStatus">Enter your 140-character status</string>
+    <string name="buttonSend">Send</string>
+</resources>
