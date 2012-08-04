@@ -3,24 +3,35 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:id="@+id/layoutScreen"
     >
 <TextView  
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content" 
     android:textSize="30sp"
     android:gravity="center"
+    android:layout_margin="10dp"
+    android:textColor="@android:color/white"
     android:text="@string/titleStatus"
     />
+<TextView
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:layout_gravity="center"
+	android:id="@+id/textCharsLeft"
+	/>
 <EditText
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
 	android:layout_weight="1"
+	android:gravity="top"
 	android:hint="@string/editStatus"
 	android:id="@+id/editStatus"
 	/>
 <Button
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
+	android:textSize="20sp"
 	android:text="@string/buttonSend"
 	android:id="@+id/buttonSend"
 	/>

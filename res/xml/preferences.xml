@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+	<ListPreference
+		android:key="prefBackgroundImage"
+		android:title="@string/prefBackgroundImageTitle"
+		android:summary="@string/prefBackgroundImageSummary"
+		android:entries="@array/prefBackgroundEntries"
+		android:entryValues="@array/prefBackgroundValues"
+	/>
+		<!-- android:defaultValue="@string/prefEditColorDefault" -->
+	<EditTextPreference
+		android:key="prefEditColor"
+		android:title="@string/prefEditColorTitle"
+		android:summary="@string/prefEditColorSummary"
+		android:defaultValue="@string/prefEditColor"
+	/>
+</PreferenceScreen>

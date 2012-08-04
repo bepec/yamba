@@ -4,4 +4,31 @@
     <string name="titleStatus">Yamba</string>
     <string name="editStatus">Enter your 140-character status</string>
     <string name="buttonSend">Send</string>
+
+    <string name="badColorValue">Bad color value, restoring default</string>
+
+<!-- preferences options     -->
+
+    <string name="titleSettings">Settings</string>
+    <string name="titleTerminate">Exit</string>
+    <string name="titleStartService">Start update</string>
+    <string name="titleStopService">Stop update</string>
+
+<!-- background image -->
+    <string name="prefBackgroundImageTitle">Background image</string>
+    <string name="prefBackgroundImageSummary">Select one of the images to make it a main screen\'s background</string>
+    <array name="prefBackgroundEntries">
+        <item>blank color</item>
+    	<item>image file</item>
+    </array>
+    <array name="prefBackgroundValues">
+        <item>blank</item>
+        <item>image</item>
+    </array>
+
+<!-- edit field color -->
+    <string name="prefEditColorTitle">Edit field color</string>
+    <string name="prefEditColorSummary">Set a color and opacity of an edit field</string>
+    <string name="prefEditColor">#aaffffff</string>
+
 </resources>

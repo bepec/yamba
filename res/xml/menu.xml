@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item
+		android:id="@+id/settings"
+		android:icon="@android:drawable/ic_menu_preferences"
+		android:title="@string/titleSettings" />
+	<item
+		android:id="@+id/startService"
+		android:icon="@drawable/ic_menu_play_clip"
+		android:title="@string/titleStartService" />
+	<item
+		android:id="@+id/terminate"
+		android:icon="@android:drawable/ic_menu_close_clear_cancel"
+		android:title="@string/titleTerminate" />
+	<item
+		android:id="@+id/stopService"
+		android:icon="@drawable/ic_menu_stop"
+		android:title="@string/titleStopService" />
+</menu>
