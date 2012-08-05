@@ -5,7 +5,10 @@ import winterwell.jtwitter.TwitterException;
 import winterwell.jtwitter.Status;
 import android.app.Service;
 import android.content.Intent;
+import android.content.ContentValues;
 import android.os.IBinder;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.util.Log;
 import java.util.List;
 
@@ -17,6 +20,8 @@ extends Service
 	private YambaApplication yamba;
 	private boolean runFlag = false;
 	private Updater updater;
+	private DbHelper dbHelper;
+	private SQLiteDatabase db;
 
 	@Override
 	public void onCreate()
@@ -24,6 +29,7 @@ extends Service
 		super.onCreate();
 		this.updater = new Updater();
 		this.yamba = (YambaApplication)getApplication();
+		this.dbHelper = new DbHelper(this);
 		Log.i(TAG, "onCreate");
 	}
 
@@ -68,34 +74,53 @@ extends Service
 		{
 			while (service.runFlag)
 			{
-				this.iterate();
+				try {
+					this.iterate();
+				}
+				catch (InterruptedException e) {
+					Log.d(TAG, "loop is fucked up!");
+					service.runFlag = false;
+				}
 			}
 		}
 
-		private void iterate()
+		private void iterate() throws InterruptedException
 		{
 			Log.d(TAG, "updater loop");
-			try 
+			try
 			{
-				try
-				{
-					timeline = yamba.getTwitter().getHomeTimeline();
-				}
-				catch (TwitterException e)
-				{
-					Log.e(TAG, "Failed to get the twitter timeline");
-				}
-				for (Status tweet: timeline)
-				{
-					Log.d(TAG, String.format("%s: %s", tweet.user.name, tweet.text));
-				}
-				Thread.sleep(DELAY_MS);
+				timeline = yamba.getTwitter().getHomeTimeline();
 			}
-			catch(InterruptedException e)
+			catch (TwitterException e)
 			{
-				Log.d(TAG, "loop is fucked up!");
-				service.runFlag = false;
+				Log.e(TAG, "Failed to get the twitter timeline");
 			}
+
+			db = dbHelper.getWritableDatabase();
+
+			for (Status tweet: timeline) {
+				processTweet(tweet);
+			}
+			db.close();
+			Thread.sleep(DELAY_MS);
+		}
+
+		void processTweet(Status tweet) {
+			ContentValues values = new ContentValues();
+			values.put(DbHelper.C_ID, tweet.id.longValue());
+			values.put(DbHelper.C_CREATED_AT, tweet.createdAt.getTime());
+			values.put(DbHelper.C_SOURCE, tweet.source);
+			values.put(DbHelper.C_USER, tweet.user.name);
+			values.put(DbHelper.C_TEXT, tweet.text);
+
+			try {
+				db.insertOrThrow(DbHelper.TABLE, null, values);
+			}
+			catch (SQLiteException e) {
+				// ignore
+			}
+
+			Log.d(TAG, String.format("%s: %s", tweet.user.name, tweet.text));
 		}
 	}
 	
