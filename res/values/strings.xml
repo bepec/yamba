@@ -5,6 +5,8 @@
     <string name="editStatus">Enter your 140-character status</string>
     <string name="buttonSend">Send</string>
 
+    <string name="titleTimeline">Timeline</string>
+
     <string name="badColorValue">Bad color value, restoring default</string>
 
 <!-- preferences options     -->
